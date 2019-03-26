@@ -34,7 +34,31 @@ public class StringCalculatorTest {
     @Test
     public void canChangeDelimiters(){
         StringCalculator calculator = new StringCalculator();
-        Assert.assertEquals(6, calculator.add("//;\n1;2"));
+        Assert.assertEquals(3, calculator.add("//;\n1;2"));
+    }
+
+    @Test
+    public void negativeNumbers_throwException(){
+        StringCalculator calculator = new StringCalculator();
+        String message ="";
+        try{
+           calculator.add("-2");
+        }catch (Exception e){
+           message = e.getMessage();
+        }
+        Assert.assertEquals("negatives not allowed -2", message);
+    }
+
+    @Test
+    public void moreNegativeNumbers_appendAtTheEnd(){
+        StringCalculator calculator = new StringCalculator();
+        String message ="";
+        try{
+            calculator.add("-2,-5");
+        }catch (Exception e){
+            message = e.getMessage();
+        }
+        Assert.assertEquals("negatives not allowed -2 -5", message);
     }
 
 }
